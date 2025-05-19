@@ -1,3 +1,4 @@
+
 import { create } from 'zustand';
 import type { Product, CartItem, User } from '@/lib/types';
 import { toast } from '@/hooks/use-toast';
@@ -86,7 +87,8 @@ interface AuthState {
   isAuthenticated: boolean;
   login: (userData: User) => void;
   logout: () => void;
-  signup: (userData: User) => void; // Simplified signup
+  signup: (userData: User) => void;
+  updateUserProfile: (updatedData: Partial<User>) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -104,5 +106,29 @@ export const useAuthStore = create<AuthState>((set) => ({
     // In a real app, this would involve an API call
     set({ user: userData, isAuthenticated: true });
     toast({ title: `Account created for ${userData.email}! Welcome!`});
-  }
+  },
+  updateUserProfile: (updatedData: Partial<User>) => {
+    set((state) => {
+      if (!state.user) return {}; // Should not happen if called from authenticated context
+      const newUser = { ...state.user, ...updatedData };
+      // Only show toast if name or other visible profile detail changed
+      let detailChanged = false;
+      if (updatedData.name !== undefined && updatedData.name !== state.user.name) detailChanged = true;
+      // Add other checks here if more fields are updatable, e.g. imageUrl
+
+      if (detailChanged) {
+        toast({ title: "Profile updated successfully!" });
+      } else if (Object.keys(updatedData).includes('addresses')) {
+        // This case is for address updates, which ManageAddresses might use.
+        // ManageAddresses.tsx will need to be updated to use this, or have its own toast.
+        // For now, let's assume a generic "Update successful" if no specific detail like name changed.
+        // Or better, let ManageAddresses handle its own toast for address changes.
+        // So only toast here if profile-page specific fields changed.
+        // For simplicity now, if name changed, it's a profile update.
+      }
+
+
+      return { user: newUser };
+    });
+  },
 }));

@@ -1,5 +1,7 @@
+
 "use client";
 
+import { useState, useEffect, type FormEvent } from "react";
 import { useAuthStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -7,9 +9,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserCircle2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 export default function AccountProfilePage() {
-  const { user } = useAuthStore();
+  const { user, updateUserProfile } = useAuthStore();
+  const [editedName, setEditedName] = useState<string>("");
+
+  useEffect(() => {
+    if (user) {
+      setEditedName(user.name || "");
+    }
+  }, [user]);
 
   if (!user) {
     return <p>Loading user profile...</p>; 
@@ -19,6 +29,23 @@ export default function AccountProfilePage() {
     if (user?.name) return user.name.split(' ').map(n => n[0]).join('').toUpperCase();
     if (user?.email) return user.email[0].toUpperCase();
     return 'VG';
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (user) {
+      // Only call updateUserProfile if the name has actually changed
+      if (editedName !== (user.name || "")) {
+        updateUserProfile({ name: editedName });
+        // The store's updateUserProfile will show a generic toast.
+        // We can show a more specific one here if needed, or rely on the store's.
+        // For now, the store's toast for name change is good.
+        toast({ title: "Profile name updated successfully!"});
+
+      } else {
+        toast({ title: "No changes to save.", variant: "default" });
+      }
+    }
   };
 
   return (
@@ -39,16 +66,27 @@ export default function AccountProfilePage() {
         </div>
       </div>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="name">Full Name</Label>
-          <Input id="name" defaultValue={user.name || ""} placeholder="Your full name" />
+          <Input 
+            id="name" 
+            value={editedName} 
+            onChange={(e) => setEditedName(e.target.value)} 
+            placeholder="Your full name" 
+          />
         </div>
         <div>
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" type="email" defaultValue={user.email} disabled />
+          <Input id="email" type="email" value={user.email} disabled />
         </div>
-        <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">Save Changes</Button>
+        <Button 
+          type="submit" 
+          className="bg-primary text-primary-foreground hover:bg-primary/90"
+          disabled={editedName === (user.name || "")} // Disable if no changes
+        >
+          Save Changes
+        </Button>
       </form>
     </div>
   );
