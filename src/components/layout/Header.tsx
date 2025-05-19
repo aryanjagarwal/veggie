@@ -37,12 +37,9 @@ export default function Header() {
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      // router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-      // For now, we'll just log it. Actual search page implementation is next.
-      console.log("Search term:", searchTerm.trim());
-      // Potentially clear search term after submission or keep it
-      // setSearchTerm(''); 
+    const trimmedSearchTerm = searchTerm.trim();
+    if (trimmedSearchTerm) {
+      router.push(`/search?q=${encodeURIComponent(trimmedSearchTerm)}`);
     }
   };
 
@@ -111,13 +108,11 @@ export default function Header() {
                   <UserPlus className="mr-1 h-4 w-4" /> Sign Up
                 </Link>
               </Button>
-              {/* Mobile only Login/Signup icons if needed or rely on dropdown */}
             </>
           )}
         </nav>
       </div>
-       {/* Search bar for mobile, shown below the main header content for better layout */}
-      <div className="md:hidden px-4 pb-3">
+       <div className="md:hidden px-4 pb-3">
           <form onSubmit={handleSearchSubmit} className="relative flex items-center w-full">
             <Input 
               type="search" 
