@@ -49,7 +49,6 @@ export const useCartStore = create<CartState>((set, get) => ({
   updateQuantity: (productId, quantity) => {
     set((state) => {
       if (quantity <= 0) {
-        // If quantity is 0 or less, remove the item
         const itemToRemove = state.items.find(item => item.product.id === productId);
         if (itemToRemove) {
           toast({ title: `${itemToRemove.product.name} removed from cart.` });
@@ -89,13 +88,15 @@ interface AuthState {
   logout: () => void;
   signup: (userData: User) => void;
   updateUserProfile: (updatedData: Partial<User>) => void;
+  addToWishlist: (productId: string) => void;
+  removeFromWishlist: (productId: string) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isAuthenticated: false,
   login: (userData) => {
-    set({ user: userData, isAuthenticated: true });
+    set({ user: { ...userData, wishlist: userData.wishlist || [] }, isAuthenticated: true });
     toast({ title: `Welcome back, ${userData.name || userData.email}!`});
   },
   logout: () => {
@@ -103,32 +104,42 @@ export const useAuthStore = create<AuthState>((set) => ({
     toast({ title: "You have been logged out."});
   },
   signup: (userData) => {
-    // In a real app, this would involve an API call
-    set({ user: userData, isAuthenticated: true });
+    set({ user: { ...userData, wishlist: userData.wishlist || [] }, isAuthenticated: true });
     toast({ title: `Account created for ${userData.email}! Welcome!`});
   },
   updateUserProfile: (updatedData: Partial<User>) => {
     set((state) => {
-      if (!state.user) return {}; // Should not happen if called from authenticated context
+      if (!state.user) return {};
       const newUser = { ...state.user, ...updatedData };
-      // Only show toast if name or other visible profile detail changed
       let detailChanged = false;
       if (updatedData.name !== undefined && updatedData.name !== state.user.name) detailChanged = true;
-      // Add other checks here if more fields are updatable, e.g. imageUrl
-
       if (detailChanged) {
         toast({ title: "Profile updated successfully!" });
-      } else if (Object.keys(updatedData).includes('addresses')) {
-        // This case is for address updates, which ManageAddresses might use.
-        // ManageAddresses.tsx will need to be updated to use this, or have its own toast.
-        // For now, let's assume a generic "Update successful" if no specific detail like name changed.
-        // Or better, let ManageAddresses handle its own toast for address changes.
-        // So only toast here if profile-page specific fields changed.
-        // For simplicity now, if name changed, it's a profile update.
       }
-
-
       return { user: newUser };
+    });
+  },
+  addToWishlist: (productId: string) => {
+    set((state) => {
+      if (!state.isAuthenticated || !state.user) {
+        // This should ideally be handled by UI first
+        return {}; 
+      }
+      const currentWishlist = state.user.wishlist || [];
+      if (currentWishlist.includes(productId)) {
+        return {}; // Already in wishlist
+      }
+      const updatedWishlist = [...currentWishlist, productId];
+      return { user: { ...state.user, wishlist: updatedWishlist } };
+    });
+  },
+  removeFromWishlist: (productId: string) => {
+    set((state) => {
+      if (!state.isAuthenticated || !state.user || !state.user.wishlist) {
+        return {};
+      }
+      const updatedWishlist = state.user.wishlist.filter(id => id !== productId);
+      return { user: { ...state.user, wishlist: updatedWishlist } };
     });
   },
 }));

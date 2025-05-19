@@ -18,7 +18,8 @@ export type User = {
   email: string;
   name?: string;
   addresses?: Address[];
-  // Add other user-specific fields as needed
+  wishlist?: string[]; // Added wishlist
+  imageUrl?: string; // Added for consistency with account page
 };
 
 export type Address = {
