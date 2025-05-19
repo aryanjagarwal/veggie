@@ -1,11 +1,13 @@
+
 "use client";
 
 import Link from 'next/link';
 import AppLogo from '@/components/layout/AppLogo';
 import CartIcon from '@/components/cart/CartIcon';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useAuthStore } from '@/lib/store';
-import { UserCircle2, LogOut, LogIn, UserPlus } from 'lucide-react';
+import { UserCircle2, LogOut, LogIn, UserPlus, Search } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,9 +17,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const { isAuthenticated, user, logout } = useAuthStore();
+  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
 
   const getUserInitials = () => {
     if (user?.name) {
@@ -29,12 +35,35 @@ export default function Header() {
     return 'VG';
   };
 
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      // router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+      // For now, we'll just log it. Actual search page implementation is next.
+      console.log("Search term:", searchTerm.trim());
+      // Potentially clear search term after submission or keep it
+      // setSearchTerm(''); 
+    }
+  };
+
   return (
     <header className="bg-card border-b border-border shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <AppLogo />
-        <nav className="flex items-center gap-4">
-          <Button variant="ghost" asChild>
+        <nav className="flex items-center gap-2 md:gap-4 flex-grow justify-end">
+          <form onSubmit={handleSearchSubmit} className="relative hidden md:flex items-center flex-grow max-w-xs lg:max-w-sm ml-4">
+            <Input 
+              type="search" 
+              placeholder="Search products..." 
+              className="pr-10" 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Button type="submit" variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8">
+              <Search className="h-4 w-4" />
+            </Button>
+          </form>
+          <Button variant="ghost" asChild className="hidden sm:inline-flex">
             <Link href="/">Products</Link>
           </Button>
           <CartIcon />
@@ -72,19 +101,35 @@ export default function Header() {
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="ghost" asChild>
+              <Button variant="ghost" asChild className="hidden sm:inline-flex">
                 <Link href="/login" className="flex items-center">
                   <LogIn className="mr-1 h-4 w-4" /> Login
                 </Link>
               </Button>
-              <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90 hidden sm:inline-flex" asChild>
                 <Link href="/signup" className="flex items-center">
                   <UserPlus className="mr-1 h-4 w-4" /> Sign Up
                 </Link>
               </Button>
+              {/* Mobile only Login/Signup icons if needed or rely on dropdown */}
             </>
           )}
         </nav>
+      </div>
+       {/* Search bar for mobile, shown below the main header content for better layout */}
+      <div className="md:hidden px-4 pb-3">
+          <form onSubmit={handleSearchSubmit} className="relative flex items-center w-full">
+            <Input 
+              type="search" 
+              placeholder="Search products..." 
+              className="pr-10 w-full" 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Button type="submit" variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8">
+              <Search className="h-4 w-4" />
+            </Button>
+          </form>
       </div>
     </header>
   );
