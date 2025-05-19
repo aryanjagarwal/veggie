@@ -3,7 +3,7 @@ import ProductList from '@/components/products/ProductList';
 import { sampleProducts } from '@/lib/products'; // Using sample data
 import type { Product } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Leaf, Truck, Smile, ShoppingBasket, Sun, Sprout } from 'lucide-react';
+import { Leaf, Truck, Smile, ShoppingBasket, Sun, Sprout, Star, LayoutGrid } from 'lucide-react';
 
 export default function HomePage() {
   // In a real app, fetch products from an API
@@ -51,14 +51,17 @@ export default function HomePage() {
 
   return (
     <div className="space-y-12">
-      <section className="text-center py-10 bg-gradient-to-r from-primary/20 via-background to-accent/10 rounded-lg shadow-lg">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">Welcome to VeggieGo!</h1>
-        <p className="text-lg md:text-xl text-foreground max-w-2xl mx-auto">Your one-stop shop for the freshest fruits and vegetables, delivered right to your door.</p>
+      <section className="text-center py-12 bg-gradient-to-r from-primary/20 via-background to-accent/10 rounded-lg shadow-xl">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4">Welcome to VeggieGo!</h1>
+        <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto px-4">Your one-stop shop for the freshest fruits and vegetables, delivered right to your door.</p>
       </section>
       
       {featuredProducts.length > 0 && (
         <section>
-          <h2 className="text-3xl font-semibold mb-6 text-center sm:text-left">Today's Top Picks</h2>
+          <div className="flex items-center justify-center sm:justify-start mb-6">
+            <Star className="h-8 w-8 text-yellow-500 mr-3" />
+            <h2 className="text-3xl font-semibold">Today's Top Picks</h2>
+          </div>
           <ProductList products={featuredProducts} />
         </section>
       )}
@@ -76,7 +79,7 @@ export default function HomePage() {
       {leafyGreensProducts.length > 0 && (
         <section>
           <div className="flex items-center justify-center sm:justify-start mb-6">
-            <Sprout className="h-8 w-8 text-green-600 mr-3" /> {/* Using a specific green for variety */}
+            <Sprout className="h-8 w-8 text-green-600 mr-3" />
             <h2 className="text-3xl font-semibold">Leafy Greens</h2>
           </div>
           <ProductList products={leafyGreensProducts} />
@@ -100,10 +103,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
-        <h2 className="text-3xl font-semibold mb-6 text-center sm:text-left">Explore Our Full Range</h2>
-        <ProductList products={allProducts} />
-      </section>
+      {allProducts.length > 0 && (
+        <section>
+          <div className="flex items-center justify-center sm:justify-start mb-6">
+            <LayoutGrid className="h-8 w-8 text-primary mr-3" />
+            <h2 className="text-3xl font-semibold">Explore Our Full Range</h2>
+          </div>
+          <ProductList products={allProducts} />
+        </section>
+      )}
     </div>
   );
 }
