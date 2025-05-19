@@ -4,20 +4,20 @@
  * @fileOverview AI flow to suggest products or related terms based on a user's search query.
  *
  * - suggestProductsFromSearch - A function that suggests product ideas.
- * - SuggestProductsFromSearchInputSchema - The input type for the function.
- * - SuggestProductsFromSearchOutputSchema - The return type for the function.
+ * - SuggestProductsFromSearchInput - The input type for the function.
+ * - SuggestProductsFromSearchOutput - The return type for the function.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-export const SuggestProductsFromSearchInputSchema = z.object({
+const SuggestProductsFromSearchInputSchema = z.object({
   searchQuery: z.string().describe('The user\'s original search query that yielded few or no results.'),
   currentCartItems: z.array(z.string()).optional().describe('Optional: A list of product names already in the user\'s cart to provide context.'),
 });
 export type SuggestProductsFromSearchInput = z.infer<typeof SuggestProductsFromSearchInputSchema>;
 
-export const SuggestProductsFromSearchOutputSchema = z.object({
+const SuggestProductsFromSearchOutputSchema = z.object({
   suggestedIdeas: z
     .array(z.string())
     .describe('A list of 3-5 product ideas, alternative search terms, or related categories relevant to the user\'s original query.'),
@@ -72,3 +72,4 @@ const suggestProductsFromSearchFlow = ai.defineFlow(
     return output!;
   }
 );
+
