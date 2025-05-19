@@ -7,7 +7,7 @@ export const sampleProducts: Product[] = [
     name: 'Cox\'s Orange Pippin Apples',
     price: 3.50,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/E63946/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/FF6347/FFFFFF.png', // Tomato Red / White
     description: 'A classic British apple, crisp with a complex aromatic flavour. Excellent for eating and cooking.',
     dataAiHint: 'apple fruit'
   },
@@ -16,7 +16,7 @@ export const sampleProducts: Product[] = [
     name: 'Victoria Plums',
     price: 2.99,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/A8DADC/000000.png',
+    imageUrl: 'https://placehold.co/300x300/8A2BE2/FFFFFF.png', // Blue Violet / White
     description: 'Sweet and juicy, oval-shaped plums with red skin and yellow flesh. A British favourite.',
     dataAiHint: 'plum fruit'
   },
@@ -25,7 +25,7 @@ export const sampleProducts: Product[] = [
     name: 'Forced Rhubarb',
     price: 4.20,
     category: 'Vegetables', // Culinary fruit, botanically vegetable
-    imageUrl: 'https://placehold.co/300x300/F4A261/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/FFC0CB/000000.png', // Pink / Black
     description: 'Tender, pink stalks of early-season rhubarb, grown in the dark. Less tart than maincrop.',
     dataAiHint: 'rhubarb vegetable'
   },
@@ -34,7 +34,7 @@ export const sampleProducts: Product[] = [
     name: 'Jersey Royal Potatoes',
     price: 3.75,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/E9C46A/000000.png',
+    imageUrl: 'https://placehold.co/300x300/F5DEB3/000000.png', // Wheat / Black
     description: 'Small, new potatoes with a unique, nutty flavour and flaky skin. A seasonal delicacy.',
     dataAiHint: 'potato vegetable'
   },
@@ -43,7 +43,7 @@ export const sampleProducts: Product[] = [
     name: 'Purple Sprouting Broccoli',
     price: 2.80,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/2A9D8F/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/4B0082/FFFFFF.png', // Indigo / White
     description: 'Vibrant purple florets with a delicate, slightly sweeter taste than green broccoli.',
     dataAiHint: 'broccoli vegetable'
   },
@@ -52,7 +52,7 @@ export const sampleProducts: Product[] = [
     name: 'Runner Beans',
     price: 2.50,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/264653/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/006400/FFFFFF.png', // Dark Green / White
     description: 'Long, flat green beans with a distinctive flavour. Perfect steamed or in stews.',
     dataAiHint: 'beans vegetable'
   },
@@ -61,7 +61,7 @@ export const sampleProducts: Product[] = [
     name: 'Gooseberries',
     price: 3.10,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/8ECAE6/000000.png',
+    imageUrl: 'https://placehold.co/300x300/ADFF2F/000000.png', // Green Yellow / Black
     description: 'Tart green berries, wonderful for pies, crumbles, and jams. Can be sweet when fully ripe.',
     dataAiHint: 'gooseberry fruit'
   },
@@ -70,7 +70,7 @@ export const sampleProducts: Product[] = [
     name: 'Kale',
     price: 1.90,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/023047/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/2E8B57/FFFFFF.png', // Sea Green / White
     description: 'Hardy, nutritious leafy green. Great for salads, smoothies, or cooked dishes.',
     dataAiHint: 'kale greens'
   },
@@ -79,7 +79,7 @@ export const sampleProducts: Product[] = [
     name: 'Courgettes (Zucchini)',
     price: 2.20,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/6A994E/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/32CD32/000000.png', // Lime Green / Black
     description: 'Versatile summer squash, perfect for roasting, grilling, or adding to pasta.',
     dataAiHint: 'courgette vegetable'
   },
@@ -88,7 +88,7 @@ export const sampleProducts: Product[] = [
     name: 'Conference Pears',
     price: 2.70,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/BC4749/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/DAA520/000000.png', // Goldenrod / Black
     description: 'Sweet and juicy pears with a slightly elongated shape. Good for eating or cooking.',
     dataAiHint: 'pear fruit'
   },
@@ -97,7 +97,7 @@ export const sampleProducts: Product[] = [
     name: 'Cavolo Nero',
     price: 2.95,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/1A535C/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/004225/FFFFFF.png', // Forest Green / White
     description: 'Dark green, almost black, Tuscan kale. Robust flavour, great in Italian dishes.',
     dataAiHint: 'kale vegetable'
   },
@@ -106,7 +106,7 @@ export const sampleProducts: Product[] = [
     name: 'English Strawberries',
     price: 4.50,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/FF0054/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/FF0000/FFFFFF.png', // Red / White
     description: 'Sweet, juicy, and fragrant strawberries, typically available in summer.',
     dataAiHint: 'strawberry fruit'
   },
@@ -115,7 +115,7 @@ export const sampleProducts: Product[] = [
     name: 'Leeks',
     price: 2.10,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/ADC178/000000.png',
+    imageUrl: 'https://placehold.co/300x300/90EE90/000000.png', // Light Green / Black
     description: 'Mild, onion-like flavour. Excellent in soups, stews, and quiches.',
     dataAiHint: 'leek vegetable'
   },
@@ -124,7 +124,7 @@ export const sampleProducts: Product[] = [
     name: 'Raspberries',
     price: 3.80,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/E5383B/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/E30B5D/FFFFFF.png', // Raspberry Pink / White
     description: 'Delicate, sweet-tart berries, perfect for desserts, jams, or eating fresh.',
     dataAiHint: 'raspberry fruit'
   },
@@ -133,7 +133,7 @@ export const sampleProducts: Product[] = [
     name: 'Savoy Cabbage',
     price: 1.75,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/588157/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/8FBC8F/000000.png', // Dark Sea Green / Black
     description: 'Crinkly-leaved cabbage with a mild, slightly sweet flavour. Good for shredding or braising.',
     dataAiHint: 'cabbage vegetable'
   },
@@ -142,7 +142,7 @@ export const sampleProducts: Product[] = [
     name: 'Redcurrants',
     price: 3.25,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/D00000/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/DC143C/FFFFFF.png', // Crimson / White
     description: 'Small, tart red berries often used in jellies, sauces, or as a garnish.',
     dataAiHint: 'redcurrant fruit'
   },
@@ -151,7 +151,7 @@ export const sampleProducts: Product[] = [
     name: 'Parsnips',
     price: 2.00,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/FDF0D5/000000.png',
+    imageUrl: 'https://placehold.co/300x300/FFF8DC/000000.png', // Cornsilk / Black
     description: 'Sweet, earthy root vegetable, especially delicious when roasted.',
     dataAiHint: 'parsnip vegetable'
   },
@@ -160,7 +160,7 @@ export const sampleProducts: Product[] = [
     name: 'Blackberries',
     price: 3.60,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/3C096C/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/2F0B3A/FFFFFF.png', // Dark Purple / White
     description: 'Juicy, dark purple berries that are sweet and slightly tart. Great for crumbles and jams.',
     dataAiHint: 'blackberry fruit'
   },
@@ -169,7 +169,7 @@ export const sampleProducts: Product[] = [
     name: 'Brussels Sprouts',
     price: 2.30,
     category: 'Vegetables',
-    imageUrl: 'https://placehold.co/300x300/7CB518/000000.png',
+    imageUrl: 'https://placehold.co/300x300/556B2F/FFFFFF.png', // Dark Olive Green / White
     description: 'Small, leafy green buds with a nutty, slightly bitter taste. Best roasted or steamed.',
     dataAiHint: 'sprouts vegetable'
   },
@@ -178,7 +178,7 @@ export const sampleProducts: Product[] = [
     name: 'Cherries',
     price: 5.50,
     category: 'Fruits',
-    imageUrl: 'https://placehold.co/300x300/9D0208/FFFFFF.png',
+    imageUrl: 'https://placehold.co/300x300/8B0000/FFFFFF.png', // Dark Red / White
     description: 'Sweet or tart red to black stone fruit, perfect for snacking or in pies.',
     dataAiHint: 'cherry fruit'
   }
