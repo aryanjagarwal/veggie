@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Providers } from '@/components/Providers';
+import FloatingAiAssistant from '@/components/ai/FloatingAiAssistant'; // Added import
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,6 +34,7 @@ export default function RootLayout({
           <main className="flex-grow container mx-auto px-4 py-8">
             {children}
           </main>
+          <FloatingAiAssistant /> {/* Added component */}
           <Footer />
         </Providers>
       </body>
