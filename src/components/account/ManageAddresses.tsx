@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -22,6 +23,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Checkbox } from '@/components/ui/checkbox';
+import { Badge } from '@/components/ui/badge'; // Added import
 
 // Mock addresses data
 const mockUserAddresses: Address[] = [
