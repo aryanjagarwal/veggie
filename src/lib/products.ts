@@ -181,5 +181,230 @@ export const sampleProducts: Product[] = [
     imageUrl: 'https://placehold.co/300x300/8B0000/FFFFFF.png', // Dark Red / White
     description: 'Sweet or tart red to black stone fruit, perfect for snacking or in pies.',
     dataAiHint: 'cherry fruit'
+  },
+  {
+    id: '21',
+    name: 'Bananas',
+    price: 1.60,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality bananas. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'bananas fruit'
+  },
+  {
+    id: '22',
+    name: 'Blueberries',
+    price: 4.57,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1584270354949-1c0f6a4f3c5d',
+    description: 'Fresh and high-quality blueberries. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'blueberries fruit'
+  },
+  {
+    id: '23',
+    name: 'Pineapples',
+    price: 2.36,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality pineapples. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'pineapples fruit'
+  },
+  {
+    id: '24',
+    name: 'Mangoes',
+    price: 2.02,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality mangoes. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'mangoes fruit'
+  },
+  {
+    id: '25',
+    name: 'Oranges',
+    price: 5.94,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality oranges. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'oranges fruit'
+  },
+  {
+    id: '26',
+    name: 'Grapes',
+    price: 3.50,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality grapes. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'grapes fruit'
+  },
+  {
+    id: '27',
+    name: 'Papayas',
+    price: 2.80,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality papayas. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'papayas fruit'
+  },
+  {
+    id: '28',
+    name: 'Guavas',
+    price: 2.20,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality guavas. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'guavas fruit'
+  },
+  {
+    id: '29',
+    name: 'Lychees',
+    price: 3.10,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality lychees. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'lychees fruit'
+  },
+  {
+    id: '30',
+    name: 'Pomegranates',
+    price: 3.60,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality pomegranates. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'pomegranates fruit'
+  },
+  {
+    id: '31',
+    name: 'Avocados',
+    price: 2.95,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality avocados. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'avocados fruit'
+  },
+  {
+    id: '32',
+    name: 'Granny Smith Apples',
+    price: 2.70,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality Granny Smith apples. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'granny smith apples fruit'
+  },
+  {
+    id: '33',
+    name: 'Kiwis',
+    price: 2.50,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality kiwis. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'kiwis fruit'
+  },
+  {
+    id: '34',
+    name: 'Tangerines',
+    price: 2.10,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality tangerines. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'tangerines fruit'
+  },
+  {
+    id: '35',
+    name: 'Cantaloupes',
+    price: 3.80,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality cantaloupes. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'cantaloupes fruit'
+  },
+  {
+    id: '36',
+    name: 'Watermelons',
+    price: 4.20,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality watermelons. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'watermelons fruit'
+  },
+  {
+    id: '37',
+    name: 'Honeydew Melons',
+    price: 3.25,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality honeydew melons. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'honeydew melons fruit'
+  },
+  {
+    id: '38',
+    name: 'Cranberries',
+    price: 2.00,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality cranberries. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'cranberries fruit'
+  },
+  {
+    id: '39',
+    name: 'Dragon Fruits',
+    price: 5.50,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality dragon fruits. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'dragon fruits fruit'
+  },
+  {
+    id: '40',
+    name: 'Passion Fruits',
+    price: 3.75,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality passion fruits. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'passion fruits fruit'
+  },
+  {
+    id: '41',
+    name: 'Dates',
+    price: 2.80,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality dates. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'dates fruit'
+  },
+  {
+    id: '42',
+    name: 'Figs',
+    price: 3.10,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality figs. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'figs fruit'
+  },
+  {
+    id: '43',
+    name: 'Starfruits',
+    price: 2.50,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality starfruits. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'starfruits fruit'
+  },
+  {
+    id: '44',
+    name: 'Jackfruits',
+    price: 4.00,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality jackfruits. Ideal for everyday meals and healthy snacking.',
+    dataAiHint: 'jackfruits fruit'
+  },
+  {
+    id: '45',
+    name: 'Mulberries',
+    price: 3.60,
+    category: 'Fruits',
+    imageUrl: 'https://images.unsplash.com/photo-1574226516831-e1dff420e12e',
+    description: 'Fresh and high-quality mul',
+    dataAiHint: 'mul'
   }
 ];
