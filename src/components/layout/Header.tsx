@@ -7,13 +7,14 @@ import CartIcon from '@/components/cart/CartIcon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
-import { UserButton, SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs"; // Import useClerk
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
+  const { signOut } = useClerk(); // Get signOut function
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,15 +46,30 @@ export default function Header() {
           </Button>
           <CartIcon />
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <Link href="/account">
+              <Button variant="ghost" className="hidden sm:inline-flex">Account</Button>
+            </Link>
+            <Button 
+              variant="ghost" 
+              onClick={() => signOut({ redirectUrl: '/' })}
+              className="hidden sm:inline-flex"
+            >
+              Sign Out
+            </Button>
+             {/* Minimal display for mobile when signed in, can be expanded if needed */}
+            <div className="sm:hidden">
+                <Link href="/account">
+                    <Button variant="ghost" size="sm">Account</Button>
+                </Link>
+            </div>
           </SignedIn>
           <SignedOut>
-            <SignInButton mode="modal">
+            <Link href="/sign-in">
               <Button variant="ghost" className="hidden sm:inline-flex">Login</Button>
-            </SignInButton>
-            <SignUpButton mode="modal">
+            </Link>
+            <Link href="/sign-up">
               <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90 hidden sm:inline-flex">Sign Up</Button>
-            </SignUpButton>
+            </Link>
           </SignedOut>
         </nav>
       </div>
@@ -70,14 +86,29 @@ export default function Header() {
               <Search className="h-4 w-4" />
             </Button>
           </form>
+          <SignedIn>
+            {/* Mobile Sign Out Button - UserButton is removed, so we need an explicit sign out */}
+            <div className="flex gap-2 mt-2 sm:hidden">
+                <Link href="/account" className="flex-1">
+                    <Button variant="outline" className="w-full">Account</Button>
+                </Link>
+                <Button 
+                    variant="outline" 
+                    onClick={() => signOut({ redirectUrl: '/' })}
+                    className="flex-1"
+                >
+                    Sign Out
+                </Button>
+            </div>
+          </SignedIn>
           <SignedOut>
             <div className="flex gap-2 mt-2 sm:hidden">
-              <SignInButton mode="modal">
-                <Button variant="outline" className="flex-1">Login</Button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90 flex-1">Sign Up</Button>
-              </SignUpButton>
+              <Link href="/sign-in" className="flex-1">
+                <Button variant="outline" className="w-full">Login</Button>
+              </Link>
+              <Link href="/sign-up" className="flex-1">
+                <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full">Sign Up</Button>
+              </Link>
             </div>
           </SignedOut>
       </div>
