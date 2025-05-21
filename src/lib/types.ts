@@ -22,18 +22,18 @@ export type User = {
   email?: string | null; // From Clerk
   name?: string | null; // fullName from Clerk
   imageUrl?: string | null; // From Clerk
-  // addresses?: Address[]; // Removed for initial Clerk integration
-  // wishlist?: string[]; // Removed for initial Clerk integration
 };
 
 export type Address = {
   id: string;
+  user_id?: string; // Foreign key to Clerk's user ID (or Supabase auth.users.id if synced)
   street: string;
   city: string;
   state: string;
   zipCode: string;
   country: string;
   isDefault?: boolean;
+  created_at?: string; // Optional: if you want to use it on the frontend
 };
 
 export type Order = {
