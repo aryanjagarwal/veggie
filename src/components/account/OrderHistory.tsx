@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import type { Order } from '@/lib/types';
-import { useAuthStore } from '@/lib/store';
+// Removed: import { useAuthStore } from '@/lib/store';
 import { mockOrders } from '@/lib/orders'; // Import from new location
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, TableCaption } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -13,22 +13,18 @@ import Link from 'next/link';
 import { Eye } from 'lucide-react';
 
 export default function OrderHistory() {
-  const { user } = useAuthStore();
+  // Removed: const { user } = useAuthStore();
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      // In a real app, fetch orders associated with user.id
-      // For now, using the imported mockOrders
-      setTimeout(() => { 
-        setOrders(mockOrders);
-        setIsLoading(false);
-      }, 500); // Shorter delay for mock
-    } else {
+    // Load mock orders directly, assuming this component is rendered for authenticated users
+    // In a real app, you'd fetch orders associated with the Clerk user.id
+    setTimeout(() => { 
+      setOrders(mockOrders);
       setIsLoading(false);
-    }
-  }, [user]);
+    }, 500); // Shorter delay for mock
+  }, []); // Removed user dependency
 
   if (isLoading) {
     return <p>Loading order history...</p>;
@@ -90,3 +86,4 @@ export default function OrderHistory() {
     </Table>
   );
 }
+
