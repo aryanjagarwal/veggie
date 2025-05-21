@@ -4,7 +4,9 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Providers } from '@/components/Providers';
-import FloatingAiAssistant from '@/components/ai/FloatingAiAssistant'; // Added import
+import FloatingAiAssistant from '@/components/ai/FloatingAiAssistant';
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from '@clerk/themes'; // Optional: if you want a dark theme for Clerk components
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,17 +29,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-background text-foreground`}>
-        <Providers>
-          <Header />
-          <main className="flex-grow container mx-auto px-4 py-8">
-            {children}
-          </main>
-          <FloatingAiAssistant /> {/* Added component */}
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        // baseTheme: dark, // Optional: uncomment for dark theme
+        variables: {
+          colorPrimary: '#90EE90', // VeggieGo primary green
+          colorText: '#333333',
+          colorBackground: '#FAFAFA',
+        }
+      }}
+    >
+      <html lang="en" className="h-full">
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-background text-foreground`}>
+          <Providers>
+            <Header />
+            <main className="flex-grow container mx-auto px-4 py-8">
+              {children}
+            </main>
+            <FloatingAiAssistant />
+            <Footer />
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -6,9 +6,11 @@ import Link from 'next/link';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { useCartStore, useAuthStore } from '@/lib/store';
+import { useCartStore } from '@/lib/store';
 import { ShoppingCart, Heart } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { useAuth } from '@clerk/nextjs'; // Clerk hook for auth status
+import { useState } from 'react'; // For local UI state of wishlist icon
 
 interface ProductCardProps {
   product: Product;
@@ -16,14 +18,17 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addItem: addItemToCart } = useCartStore();
-  const { user, isAuthenticated, addToWishlist, removeFromWishlist } = useAuthStore();
+  const { isSignedIn } = useAuth(); // For checking auth status
 
-  const isInWishlist = isAuthenticated && user?.wishlist?.includes(product.id);
+  // Wishlist state and logic would need to be managed via backend with Clerk userId
+  // For now, we'll keep the UI element but make it conditional on being signed in
+  // and the actual add/remove logic is removed.
+  const [isInWishlist, setIsInWishlist] = useState(false); // Placeholder
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent link navigation when clicking heart
-    e.stopPropagation(); // Prevent event bubbling to parent Link
-    if (!isAuthenticated) {
+    e.preventDefault(); 
+    e.stopPropagation(); 
+    if (!isSignedIn) {
       toast({
         title: "Login Required",
         description: "Please log in to add items to your wishlist.",
@@ -31,18 +36,14 @@ export default function ProductCard({ product }: ProductCardProps) {
       });
       return;
     }
-    if (isInWishlist) {
-      removeFromWishlist(product.id);
-      toast({ title: `${product.name} removed from wishlist.` });
-    } else {
-      addToWishlist(product.id);
-      toast({ title: `${product.name} added to wishlist!` });
-    }
+    // TODO: Implement backend call to update wishlist for the Clerk user
+    setIsInWishlist(!isInWishlist); // Placeholder toggle
+    toast({ title: `Wishlist feature for ${product.name} ${!isInWishlist ? 'activated (placeholder)' : 'deactivated (placeholder)'}.` });
   };
 
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group">
-      <div className="relative"> {/* Container for image and wishlist button */}
+      <div className="relative">
         <Link href={`/products/${product.id}`} passHref legacyBehavior>
           <a className="block cursor-pointer">
             <CardHeader className="p-0">

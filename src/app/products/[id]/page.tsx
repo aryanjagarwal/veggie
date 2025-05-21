@@ -7,16 +7,18 @@ import { sampleProducts } from '@/lib/products';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { useCartStore, useAuthStore } from '@/lib/store';
+import { useCartStore } from '@/lib/store';
 import { ShoppingCart, ArrowLeft, Heart } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { useAuth, useUser } from '@clerk/nextjs'; // Clerk hook for auth status
 
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { addItem: addItemToCart } = useCartStore();
-  const { user, isAuthenticated, addToWishlist, removeFromWishlist } = useAuthStore();
-  
+  const { isSignedIn } = useAuth(); // For checking auth status
+  // const { user } = useUser(); // If you need user details for wishlist on backend
+
   const productIdParam = params.id;
   const productId = Array.isArray(productIdParam) ? productIdParam[0] : productIdParam;
 
@@ -26,10 +28,13 @@ export default function ProductDetailPage() {
     notFound();
   }
 
-  const isInWishlist = isAuthenticated && user?.wishlist?.includes(product.id);
+  // Wishlist state and logic would need to be managed via backend with Clerk userId
+  // For now, we'll keep the UI element but make it conditional on being signed in
+  // and the actual add/remove logic is removed.
+  const [isInWishlist, setIsInWishlist] = useState(false); // Placeholder
 
   const handleWishlistToggle = () => {
-    if (!isAuthenticated) {
+    if (!isSignedIn) {
       toast({
         title: "Login Required",
         description: "Please log in to add items to your wishlist.",
@@ -37,13 +42,9 @@ export default function ProductDetailPage() {
       });
       return;
     }
-    if (isInWishlist) {
-      removeFromWishlist(product.id);
-      toast({ title: `${product.name} removed from wishlist.` });
-    } else {
-      addToWishlist(product.id);
-      toast({ title: `${product.name} added to wishlist!` });
-    }
+    // TODO: Implement backend call to update wishlist for the Clerk user
+    setIsInWishlist(!isInWishlist); // Placeholder toggle
+    toast({ title: `Wishlist feature for ${product.name} ${!isInWishlist ? 'activated (placeholder)' : 'deactivated (placeholder)'}.` });
   };
 
   return (

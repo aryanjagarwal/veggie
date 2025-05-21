@@ -1,6 +1,6 @@
 
 import { create } from 'zustand';
-import type { Product, CartItem, User } from '@/lib/types';
+import type { Product, CartItem } from '@/lib/types';
 import { toast } from '@/hooks/use-toast';
 
 interface CartState {
@@ -81,65 +81,6 @@ export const useCartStore = create<CartState>((set, get) => ({
   setLastAddedItem: (product) => set({ lastAddedItem: product }),
 }));
 
-interface AuthState {
-  user: User | null;
-  isAuthenticated: boolean;
-  login: (userData: User) => void;
-  logout: () => void;
-  signup: (userData: User) => void;
-  updateUserProfile: (updatedData: Partial<User>) => void;
-  addToWishlist: (productId: string) => void;
-  removeFromWishlist: (productId: string) => void;
-}
-
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  isAuthenticated: false,
-  login: (userData) => {
-    set({ user: { ...userData, wishlist: userData.wishlist || [] }, isAuthenticated: true });
-    toast({ title: `Welcome back, ${userData.name || userData.email}!`});
-  },
-  logout: () => {
-    set({ user: null, isAuthenticated: false });
-    toast({ title: "You have been logged out."});
-  },
-  signup: (userData) => {
-    set({ user: { ...userData, wishlist: userData.wishlist || [] }, isAuthenticated: true });
-    toast({ title: `Account created for ${userData.email}! Welcome!`});
-  },
-  updateUserProfile: (updatedData: Partial<User>) => {
-    set((state) => {
-      if (!state.user) return {};
-      const newUser = { ...state.user, ...updatedData };
-      let detailChanged = false;
-      if (updatedData.name !== undefined && updatedData.name !== state.user.name) detailChanged = true;
-      if (detailChanged) {
-        toast({ title: "Profile updated successfully!" });
-      }
-      return { user: newUser };
-    });
-  },
-  addToWishlist: (productId: string) => {
-    set((state) => {
-      if (!state.isAuthenticated || !state.user) {
-        // This should ideally be handled by UI first
-        return {}; 
-      }
-      const currentWishlist = state.user.wishlist || [];
-      if (currentWishlist.includes(productId)) {
-        return {}; // Already in wishlist
-      }
-      const updatedWishlist = [...currentWishlist, productId];
-      return { user: { ...state.user, wishlist: updatedWishlist } };
-    });
-  },
-  removeFromWishlist: (productId: string) => {
-    set((state) => {
-      if (!state.isAuthenticated || !state.user || !state.user.wishlist) {
-        return {};
-      }
-      const updatedWishlist = state.user.wishlist.filter(id => id !== productId);
-      return { user: { ...state.user, wishlist: updatedWishlist } };
-    });
-  },
-}));
+// Note: useAuthStore has been removed as Clerk will handle authentication.
+// Wishlist and Address management would typically be handled by your own backend
+// when using Clerk, linking data to the Clerk user ID.

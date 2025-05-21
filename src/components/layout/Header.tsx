@@ -6,34 +6,14 @@ import AppLogo from '@/components/layout/AppLogo';
 import CartIcon from '@/components/cart/CartIcon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useAuthStore } from '@/lib/store';
-import { UserCircle2, LogOut, LogIn, UserPlus, Search } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Search } from 'lucide-react';
+import { UserButton, SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
-  const { isAuthenticated, user, logout } = useAuthStore();
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
-
-  const getUserInitials = () => {
-    if (user?.name) {
-      return user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-    }
-    if (user?.email) {
-      return user.email[0].toUpperCase();
-    }
-    return 'VG';
-  };
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,52 +44,17 @@ export default function Header() {
             <Link href="/">Products</Link>
           </Button>
           <CartIcon />
-          {isAuthenticated && user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                  <Avatar className="h-9 w-9">
-                    <AvatarImage src={user.imageUrl || `https://placehold.co/100x100.png?text=${getUserInitials()}`} alt={user.name || user.email} data-ai-hint="profile avatar" />
-                    <AvatarFallback>{getUserInitials()}</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{user.name || "VeggieGo User"}</p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      {user.email}
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/account" className="flex items-center">
-                    <UserCircle2 className="mr-2 h-4 w-4" />
-                    Account
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={logout} className="flex items-center cursor-pointer">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <>
-              <Button variant="ghost" asChild className="hidden sm:inline-flex">
-                <Link href="/login" className="flex items-center">
-                  <LogIn className="mr-1 h-4 w-4" /> Login
-                </Link>
-              </Button>
-              <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90 hidden sm:inline-flex" asChild>
-                <Link href="/signup" className="flex items-center">
-                  <UserPlus className="mr-1 h-4 w-4" /> Sign Up
-                </Link>
-              </Button>
-            </>
-          )}
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <Button variant="ghost" className="hidden sm:inline-flex">Login</Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90 hidden sm:inline-flex">Sign Up</Button>
+            </SignUpButton>
+          </SignedOut>
         </nav>
       </div>
        <div className="md:hidden px-4 pb-3">
@@ -125,6 +70,16 @@ export default function Header() {
               <Search className="h-4 w-4" />
             </Button>
           </form>
+          <SignedOut>
+            <div className="flex gap-2 mt-2 sm:hidden">
+              <SignInButton mode="modal">
+                <Button variant="outline" className="flex-1">Login</Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90 flex-1">Sign Up</Button>
+              </SignUpButton>
+            </div>
+          </SignedOut>
       </div>
     </header>
   );
